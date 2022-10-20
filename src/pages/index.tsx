@@ -1,9 +1,16 @@
 import type { NextPage } from 'next'
+import { trpc } from '@/utils/trcp';
 import Head from 'next/head'
 import Image from 'next/image'
 
 
 const Home: NextPage = () => {
+  const {data, isLoading} = trpc.hello.useQuery({text:"Oleg"})
+
+  console.log(data)
+
+
+
   return (
     <div className="h-full w-full flex flex-col justify-center items-center text-center">
      <h1 className='text-2xl font-bold mb-6'>Which one is Roundest???</h1>
