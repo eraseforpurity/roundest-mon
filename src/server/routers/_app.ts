@@ -1,15 +1,21 @@
 import { z } from 'zod';
 import { publicProcedure, router } from '../trcp';
 export const appRouter = router({
-  hello: publicProcedure
+  'get-pokemon-by-id': publicProcedure
     .input(
       z.object({
-        text: z.string().nullish(),
+        id: z.number(),
       }),
     )
-    .query(({ input }) => {
+    .query(async ({ input }) => {
+      const requset = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${input.id}`,
+      );
+      const pokemon = await requset.json();
+
       return {
-        greeting: `hello ${input?.text ?? 'world'}`,
+        name: pokemon.name,
+        photo: pokemon.sprites.front_default,
       };
     }),
 });
