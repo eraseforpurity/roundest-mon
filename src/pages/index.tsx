@@ -57,17 +57,15 @@ const Home: NextPage<HomePageType> = ({ firstPok, secondPok }) => {
 export default Home;
 
 const Pokemon: React.FC<{ pokemon: PostCreateInput; vote: () => void }> = ({
-  pokemon,
+  pokemon: { name, photo },
   vote,
 }) => {
   return (
     <div>
       <div className="h-60 bg-red-200 flex items-center justify-center relative">
-        <Image layout="fill" objectFit="contain" src={pokemon.photo} />
+        <Image alt={name} layout="fill" objectFit="contain" src={photo} />
       </div>
-      <p className="z-10 top-full font-bold text-xl capitalize mb-3">
-        {pokemon.name}
-      </p>
+      <p className="z-10 top-full font-bold text-xl capitalize mb-3">{name}</p>
       <button
         onClick={vote}
         className="bg-purple-700 p-3 rounded active:shadow-md active:shadow-purple-600"
